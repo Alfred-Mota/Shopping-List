@@ -3,4 +3,8 @@ python -m uvicorn app.main:app --reload --port 8000
 
 O FastAPI fornece uma api Swagger UI (User Interface) em: http://localhost:8000/docs
 
-Nome do env utilizado: PythonEnv
+<!--
+Notas pessoais: 
+
+* Nome do env utilizado: PythonEnv
+-->

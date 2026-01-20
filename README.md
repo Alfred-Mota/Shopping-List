@@ -1,95 +1,93 @@
-# 📌 Bibliotecas do Projeto (e por que usar)
+# 🛒 Shopping List – Projeto de Estudo com FastAPI
 
-Este projeto é uma aplicação web simples para gerenciamento de **listas de compras**, utilizando **Python no backend**, **JavaScript no frontend** e **banco de dados SQL** para persistência.
+Este repositório contém um **projeto de estudo** criado para aprender, na prática,  
+como funciona uma aplicação web completa, desde o backend até o frontend.
 
-Abaixo está a explicação das principais bibliotecas utilizadas no backend e o motivo de cada escolha.
-
----
-
-## 🚀 FastAPI
-
-**O que é:**  
-FastAPI é um framework web moderno para Python, focado na criação de APIs REST de forma simples, rápida e organizada.
-
-**Por que usar:**
-- Criação fácil de rotas HTTP (`GET`, `POST`, `DELETE`, etc.).
-- Documentação automática da API (Swagger e ReDoc).
-- Integração nativa com validação de dados.
-- Código limpo, legível e fácil de manter.
-- Ótimo desempenho mesmo em projetos maiores.
-
-**Uso no projeto:**
-- Definição da aplicação backend.
-- Criação dos endpoints da API.
-- Organização da lógica do servidor.
+O foco principal é **entendimento de fundamentos**, não a criação de um produto final.
 
 ---
 
-## ⚙️ Uvicorn
+## 🎯 Objetivo do Projeto
 
-**O que é:**  
-Uvicorn é um **servidor ASGI** responsável por executar a aplicação FastAPI e escutar as requisições HTTP.
+Construir uma aplicação simples de **lista de compras** para aprender:
 
-**Por que usar:**
-- É o servidor recomendado para aplicações FastAPI.
-- Suporte a aplicações assíncronas (ASGI).
-- Modo de desenvolvimento com `--reload`.
-- Simples de configurar e rodar.
-
-**Uso no projeto:**
-- Inicialização do servidor web localmente.
-- Exposição da API na porta configurada (ex.: `http://localhost:8000`).
+- Como criar uma API com **FastAPI**
+- Como conectar um backend a um banco de dados SQL
+- Como consumir essa API no frontend
+- Como organizar código de forma clara e modular
+- Como evoluir o projeto para **autenticação** e **React**
 
 ---
 
-## 🗄️ pyodbc
+## 🧱 Tecnologias Utilizadas
 
-**O que é:**  
-pyodbc é uma biblioteca Python que permite a conexão com bancos de dados através de **ODBC (Open Database Connectivity)**.
+### Backend
+- Python
+- FastAPI
+- Uvicorn
+- SQL Server
+- pyodbc
+- Pydantic
 
-**Por que usar:**
-- Compatível com vários bancos SQL (SQL Server, PostgreSQL, MySQL, entre outros).
-- Permite escrita direta de comandos SQL.
-- Ideal para projetos simples e para quem quer controle total das queries.
-- Boa opção antes de adotar um ORM mais complexo.
-
-**Pontos de atenção:**
-- É necessário ter o driver ODBC do banco instalado.
-- SQL pode variar conforme o banco utilizado.
-
-**Uso no projeto:**
-- Conexão com o banco de dados.
-- Execução de comandos SQL para criar tabelas, inserir e consultar dados.
+### Frontend
+- HTML
+- CSS
+- TypeScript
+- Vite
 
 ---
 
-## ✅ Pydantic
+## 📦 Funcionalidades Atuais
 
-**O que é:**  
-Pydantic é uma biblioteca para **validação e serialização de dados**, amplamente utilizada junto com FastAPI.
-
-**Por que usar:**
-- Garante que os dados recebidos pela API estejam corretos.
-- Reduz erros causados por dados inválidos.
-- Define claramente o formato das requisições e respostas.
-- Facilita manutenção e leitura do código.
-
-**Uso no projeto:**
-- Definição de modelos de entrada (request).
-- Definição de modelos de saída (response).
-- Validação automática dos dados enviados pelo frontend.
+- Criar itens em uma lista de compras
+- Listar itens salvos no banco
+- Filtrar itens por usuário
+- Remover itens
+- Interface simples para interação
+- Comunicação frontend ↔ backend via HTTP
 
 ---
 
-## 📦 Resumo das dependências
+## 📁 Organização do Projeto
 
-| Biblioteca | Função no projeto |
-|----------|------------------|
-| FastAPI | Criação da API e definição das rotas |
-| Uvicorn | Execução do servidor web |
-| pyodbc | Conexão e comunicação com banco SQL |
-| Pydantic | Validação e estruturação de dados |
+O projeto está organizado em camadas, separando responsabilidades:
+
+- Backend: API, banco de dados e regras de negócio
+- Frontend: interface, chamadas HTTP e estado da tela
+- Documentação: resumos e anotações de aprendizado
+
+Arquivos de resumo detalham cada parte do projeto:
+- `ResumoFrontEnd.md`
+- Documentação do backend
+- Roadmap de evolução
 
 ---
 
-Este conjunto de bibliotecas permite criar uma aplicação **simples, organizada e escalável**, servindo como uma boa base para evoluções futuras como autenticação, novos endpoints e deploy em produção.
+## 🚀 Planejamento Futuro
+
+Este projeto será evoluído para incluir:
+
+- Autenticação de usuários (login, JWT)
+- Proteção de rotas no backend
+- Associação de dados ao usuário autenticado
+- Migração do frontend para **React**
+- Organização mais avançada do backend
+
+---
+
+## 🧠 Filosofia
+
+Este projeto segue uma filosofia clara:
+
+> **Entender antes de abstrair.**
+
+Por isso:
+- o frontend começou sem frameworks
+- o banco foi acessado sem ORM
+- cada escolha foi feita para aprendizado, não conveniência
+
+Essa base facilita a evolução para projetos mais complexos no futuro.
+
+---
+
+📌 Este repositório serve como **base de aprendizado**, referência futura e ponto de partida para novas ideias.
