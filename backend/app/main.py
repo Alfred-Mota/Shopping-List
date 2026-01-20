@@ -1,10 +1,18 @@
 from fastapi import FastAPI, HTTPException, Path
 from typing import Optional
 from pydantic import BaseModel, Field
-
+from fastapi.middleware.cors import CORSMiddleware
 from .db import get_connection, init_db
 
 app = FastAPI()
+#Permissoes de CORS para acesso do front
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class ItemCreate(BaseModel):
     user_name: str = Field(min_length=1, max_length=255)
@@ -52,41 +60,10 @@ def db_table_check():
                 'shopping_items_exists': bool(result)
         }
 
-@app.get('/items-list')
-def items_list():
-    '''
-    Recuperar uma lista de compras
-    '''
-    sql = """
-            select id, user_name, item_name, quantity, created_at 
-            from shopping_items
-            order by created_at desc
-          """
-    
-    try:
-        with get_connection() as connection:
-            cursor = connection.cursor()
-            cursor.execute(sql)
-            rows =  cursor.fetchall()
-            items = []
-            for r in rows:
-                items.append({
-            "id": r[0],
-            "user_name": r[1],
-            "item_name": r[2],
-            "quantity": r[3],
-            "created_at": str(r[4]),  # datetime -> string pra JSON
-        })
-        return{
-            'lista': items
-        }
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-        
 @app.get('/items')
 def list_items(user_name: Optional[str] = None):
     '''
-    Recuperar a lista de um usuario em especifico
+    Recuperar a lista de um usuario em especifico ou toda as compras cadastradas
     '''
     base_sql = """
                 select id, user_name, item_name, quantity, created_at 
