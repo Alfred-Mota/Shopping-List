@@ -74,3 +74,14 @@ button[data-id]:hover {
   transform: translateY(-1px);
   transition: all 0.4s ease, transform 0.15s ease;
 }
+
+#addBtn{
+  background: white;
+  transition: all 0.4s ease, transform 0.15s ease;
+}
+#addBtn:hover {
+  background: linear-gradient(135deg, #54d671, #38f862);
+  color: white;
+  transform: translateY(-1px);
+  transition: all 0.4s ease, transform 0.15s ease;
+}
