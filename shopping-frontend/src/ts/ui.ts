@@ -1,5 +1,5 @@
 import type { ShoppingItem } from "./types";
-import { fetchItems, createItem, deleteItem } from "./api";
+import { getItems, createItem, deleteItem } from "./api";
 
 function escapeHtml(s: string) {
     /**
@@ -90,7 +90,7 @@ export function mountApp(root: HTMLElement) {
   async function refresh() {
     try {
       setStatus("Carregando...");
-      const items = await fetchItems(filterInput.value);
+      const items = await getItems(filterInput.value);
       render(items);
       setStatus(`OK • ${items.length} item(ns)`);
     } catch (err) {

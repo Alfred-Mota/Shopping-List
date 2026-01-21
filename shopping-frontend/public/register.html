@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/css/login.css">
+    <script type="module" src="/src/ts/register.ts" defer></script>
+    <title>Register</title>
+</head>
+<body>
+    <main class="login-container">
+        <h1>Registrar</h1>
+
+        <form id="register-form">
+
+            <label>Usuario
+                <input type="text" required id="username">
+            </label>
+
+            <label>Senha
+                <input type="password" required id="password">
+            </label>
+
+            <button id="register-submit">Registrar</button>
+        </form>
+        <p id="register-error" class="error-hidden"></p>
+    </main>
+</body>
+</html>

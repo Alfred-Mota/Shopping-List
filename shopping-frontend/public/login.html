@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/css/login.css">
+    <script type="module" src="/src/ts/login.ts" defer></script>
+    <title>Login</title>
+</head>
+<body>
+    <main class="login-container">
+        <h1>Login</h1>
+
+        <form id="login-form">
+
+            <label>Usuario
+                <input type="text" required id="username">
+            </label>
+
+            <label>Senha
+                <input type="password" required id="password">
+            </label>
+
+            <button id="login-submit">Entrar</button>
+        </form>
+        <p></p>
+        <button id="register">Registrar</button>
+        <p id="login-error" class="error-hidden"></p>
+    </main>
+</body>
+</html>

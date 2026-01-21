@@ -3,8 +3,19 @@ from typing import Optional
 from pydantic import BaseModel, Field
 from fastapi.middleware.cors import CORSMiddleware
 from .db import get_connection, init_db
+from .routers.auth import router as auth_router
 
 app = FastAPI()
+
+#Teste
+from app.test_auth import get_current_user_payload
+from fastapi import Depends
+
+@app.get("/me")
+def me(payload: dict = Depends(get_current_user_payload)):
+    return payload
+#Teste
+
 #Permissoes de CORS para acesso do front
 app.add_middleware(
     CORSMiddleware,
@@ -13,6 +24,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(auth_router)
 
 class ItemCreate(BaseModel):
     user_name: str = Field(min_length=1, max_length=255)
