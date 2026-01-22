@@ -1,37 +1,4 @@
-import os
-import pyodbc
-
-# CONN_STR = (
-#     "DRIVER={ODBC Driver 17 for SQL Server};"
-#     "SERVER=localhost;"
-#     "DATABASE=ShoppingDB;"
-#     "UID=sa;"
-#     "PWD=SuaSenhaAqui;"
-# )
-
-# Windows Authentication 
-# CONN_STR = (
-#     "DRIVER={ODBC Driver 17 for SQL Server};"
-#     "SERVER=localhost;"
-#     "DATABASE=ShoppingDB;"
-#     'Trusted_Connection=yes;'
-# )
-
-server = 'DESKTOP-68O9AP5' # Substitua pelo nome do servidor SQL Server
-database = 'ShoppingDB'  # Substitua pelo nome do banco de dados
-
-CONN_STR = (
-    "DRIVER={ODBC Driver 17 for SQL Server};"
-    f'SERVER={server};'
-    f'DATABASE={database};'
-    'Trusted_Connection=yes;'
-)
-
-def get_connection():
-    '''
-    Abre e retorna uma conexao pyodbc com o SQL Server
-    '''
-    return pyodbc.connect(CONN_STR, timeout=5)
+from .connection import get_connection
 
 def init_users_table():
     '''
@@ -45,8 +12,8 @@ def init_users_table():
     sql = """
             if object_id('dbo.users', 'u') is null
             begin
-                create table users(
-                id int identity primary key,
+                create table dbo.users(
+                id int identity(1,1) primary key,
                 user_name nvarchar(255) unique not null,
                 password_hash nvarchar(255) not null,
                 role nvarchar(50) not null,
@@ -73,12 +40,17 @@ def init_shopping_items_table():
     sql = """
             if object_id('dbo.shopping_items', 'u') is null
             begin
-                create table shopping_items(
+                create table dbo.shopping_items(
                     id int identity(1,1) primary key,
-                    user_name nvarchar(255) not null,
                     item_name nvarchar(255) not null,
                     quantity int not null default 1,
-                    created_at datetime2 not null default sysdatetime()
+                    created_at datetime2 not null default sysdatetime(),
+                    
+                    user_id INT NOT NULL,
+                    constraint fk_compras_usuario
+                        foreign key (user_id)
+                        references dbo.users(id)
+                        on delete cascade
                 )
             end
          """
@@ -89,5 +61,5 @@ def init_shopping_items_table():
         print("Tabela Shopping Items criada")
 
 def init_db():
-    init_shopping_items_table()
     init_users_table()
+    init_shopping_items_table()

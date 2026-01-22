@@ -18,6 +18,7 @@ export function logout(){
     /**
      * Remover o token e redirecionar ao pagina de login
      */
+    console.log("CLICK")
     localStorage.removeItem(TOKEN_KEY)
     window.location.href='/login.html'
 }

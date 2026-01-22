@@ -1,7 +1,7 @@
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Header
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError
-from app.security import decode_token
+from app.security.security import decode_token
 
 # Metodo automatico para fazer uma leitura do header em busca da Authorization Bearer.
 # Abstrai o seguinte trecho
@@ -12,7 +12,9 @@ from app.security import decode_token
 #     raise 401
 # token = auth.replace("Bearer ", "")
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+##Dependes é tipo um middlewer, esta aplicando um metodo e retornando o valor   
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="authorization")
 
 def get_current_user_payload(token: str = Depends(oauth2_scheme)) -> dict:
     try:

@@ -85,3 +85,9 @@ button[data-id]:hover {
   transform: translateY(-1px);
   transition: all 0.4s ease, transform 0.15s ease;
 }
+
+#btn-logout{
+  position: absolute;
+  left: 90%;
+  top: 10%;
+}

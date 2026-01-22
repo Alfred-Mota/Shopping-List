@@ -11,7 +11,6 @@ export async function getItems(userName?: string):Promise<ShoppingItem[]> {
      */
     const qs = userName ? `?user_name=${encodeURIComponent(userName)}` : "";
     const res = await fetchWithAuth(`/items${qs}`);
-
     if (!res.ok) {
         throw new Error("Falha ao carregar itens");
     }

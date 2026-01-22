@@ -1,5 +1,6 @@
 import type { ShoppingItem } from "./types";
 import { getItems, createItem, deleteItem } from "./api";
+import { logout } from "./auth";
 
 function escapeHtml(s: string) {
     /**
@@ -17,7 +18,7 @@ export function mountApp(root: HTMLElement) {
   root.innerHTML = `
     <div class="container">
       <h1>Shopping List</h1>
-
+      <button id="btn-logout">Logout</button>
       <div class="row">
         <input type="text" id="user_name" placeholder="Usuário (ex: ana)" />
         <input type="text" id="item_name" placeholder="Item (ex: leite)" />
@@ -42,12 +43,15 @@ export function mountApp(root: HTMLElement) {
   const filterInput = root.querySelector<HTMLInputElement>("#filter_user")!;
   const addBtn = root.querySelector<HTMLButtonElement>("#addBtn")!;
   const listBtn = root.querySelector<HTMLButtonElement>("#listBtn")!;
+  const logoutBtn = root.querySelector<HTMLButtonElement>("#btn-logout")!;
   const statusEl = root.querySelector<HTMLSpanElement>("#status")!;
   const listEl = root.querySelector<HTMLUListElement>("#list")!;
 
   function setStatus(msg: string) {
     statusEl.textContent = msg;
   }
+
+  logoutBtn.addEventListener('click', ()=> logout())
 
   function render(items: ShoppingItem[]) {
     if (items.length === 0) {
@@ -62,7 +66,7 @@ export function mountApp(root: HTMLElement) {
             <div>
               <div><strong>${escapeHtml(it.item_name)}</strong> (qtd: ${it.quantity})</div>
               <div class="meta">
-                usuário: ${escapeHtml(it.user_name)} • id: ${it.id} • ${new Date(it.created_at).toLocaleString()}
+              •Compra feita em ${new Date(it.created_at).toLocaleString()}
               </div>
             </div>
             <button data-id="${it.id}">Remover</button>
